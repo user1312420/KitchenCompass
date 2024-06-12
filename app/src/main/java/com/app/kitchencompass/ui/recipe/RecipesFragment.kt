@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.app.kitchencompass.databinding.FragmentGalleryBinding
 
+
 class RecipesFragment : Fragment() {
 
     private var _binding: FragmentGalleryBinding? = null
@@ -18,6 +19,11 @@ class RecipesFragment : Fragment() {
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
+
+    private lateinit var binding2: FragmentGalleryBinding
+    private lateinit var listAdapter: ListAdapter
+    private lateinit var listData: ListData
+    var dataArrayList = ArrayList<ListData?>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -41,4 +47,6 @@ class RecipesFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
+
+
 }
