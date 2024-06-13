@@ -1,7 +1,7 @@
 package com.app.kitchencompass
+
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.app.kitchencompass.ui.home.HomeFragment
 import com.app.kitchencompass.ui.recipe.RecipesFragment
@@ -10,11 +10,16 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity() {
 
-    lateinit var bottomNav : BottomNavigationView
+    lateinit var bottomNav: BottomNavigationView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        // Toolbar initialisieren und als ActionBar setzen
+        val toolbar: androidx.appcompat.widget.Toolbar = findViewById(R.id.toolbar)
+        setSupportActionBar(toolbar)
+
         loadFragment(HomeFragment())
         bottomNav = findViewById(R.id.bottomNav) as BottomNavigationView
         bottomNav.setOnItemSelectedListener {
@@ -31,18 +36,14 @@ class MainActivity : AppCompatActivity() {
                     loadFragment(RecipesFragment())
                     true
                 }
-
-                else -> {
-                    Toast.makeText(this, "Ungültige Auswahl", Toast.LENGTH_SHORT).show()
-                    false
-                }
+                else -> false
             }
         }
     }
-    private  fun loadFragment(fragment: Fragment){
+
+    private fun loadFragment(fragment: Fragment) {
         val transaction = supportFragmentManager.beginTransaction()
-        transaction.replace(R.id.container,fragment)
+        transaction.replace(R.id.container, fragment)
         transaction.commit()
     }
-
 }
