@@ -14,6 +14,7 @@ import com.squareup.picasso.Picasso
 class RecipeAdapter(private val recipes: List<Recipe>) : RecyclerView.Adapter<RecipeAdapter.RecipeViewHolder>() {
 
     class RecipeViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val recipeName: TextView = itemView.findViewById(R.id.recipeName)
         val previewImage: ImageView = itemView.findViewById(R.id.previewImage)
         val estimatedTime: TextView = itemView.findViewById(R.id.estimated_time)
     }
@@ -27,6 +28,7 @@ class RecipeAdapter(private val recipes: List<Recipe>) : RecyclerView.Adapter<Re
         val recipe = recipes[position]
         Picasso.get().load(recipe.previewImage).into(holder.previewImage)
         holder.estimatedTime.text = recipe.estimated_time
+        holder.recipeName.text = recipe.name
     }
 
     override fun getItemCount(): Int {

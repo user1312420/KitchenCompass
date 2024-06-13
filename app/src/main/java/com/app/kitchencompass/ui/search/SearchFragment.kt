@@ -24,7 +24,7 @@ import java.io.IOException
 class SearchFragment : Fragment() {
 
     private val client = OkHttpClient()
-    private val baseURL: String = "http://34.134.3.190:9999/api/"
+    private val baseURL: String = "http://10.0.2.2:9999/api/"
     private lateinit var searchView: SearchView
     private lateinit var recyclerView: RecyclerView
     private lateinit var recipeAdapter: RecipeAdapter
