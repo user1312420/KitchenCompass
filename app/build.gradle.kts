@@ -73,19 +73,24 @@ dependencies {
     androidTestImplementation(libs.androidx.espresso.core)
 
     //okhttp
-    implementation("com.squareup.okhttp3:okhttp:4.12.0")
+    implementation(libs.okhttp)
 
     // define a BOM and its version
-    implementation(platform("com.squareup.okhttp3:okhttp-bom:4.12.0"))
+    implementation(platform(libs.okhttp.bom))
 
     // define any required OkHttp artifacts without version
-    implementation("com.squareup.okhttp3:okhttp")
-    implementation("com.squareup.okhttp3:logging-interceptor")
+    implementation(libs.okhttp3.okhttp)
+    implementation(libs.logging.interceptor)
 
     //gson
-    implementation ("com.google.code.gson:gson:2.8.9")
+    implementation (libs.gson)
     androidTestImplementation(platform(libs.androidx.compose.bom))
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+
+    implementation(libs.androidx.recyclerview)
+    implementation(libs.androidx.cardview)
+
+    implementation(libs.picasso)
 }

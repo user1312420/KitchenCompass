@@ -1,3 +1,4 @@
+// SearchActivity.kt
 package com.app.kitchencompass.ui.search
 
 import android.os.Bundle
@@ -5,6 +6,8 @@ import android.util.Log
 import android.widget.SearchView
 import androidx.activity.ComponentActivity
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.app.kitchencompass.R
 import com.app.kitchencompass.Recipe
 import com.google.gson.Gson
@@ -20,24 +23,27 @@ class SearchActivity : ComponentActivity() {
     private val client = OkHttpClient()
     private val baseURL: String = "http://34.134.3.190:9999/api/"
     private lateinit var searchView: SearchView
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var recipeAdapter: RecipeAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_search)
 
         searchView = findViewById(R.id.search_view)
+        recyclerView = findViewById(R.id.recycler_view)
+        recyclerView.layoutManager = LinearLayoutManager(this)
 
-        //searchview listener
+        // SearchView listener
         searchView.setOnQueryTextListener(
-            object: SearchView.OnQueryTextListener {
+            object : SearchView.OnQueryTextListener {
                 override fun onQueryTextSubmit(query: String?): Boolean {
-                    if(!query.isNullOrBlank()){
+                    if (!query.isNullOrBlank()) {
                         lifecycleScope.launch {
                             try {
                                 val recipes: List<Recipe> = requestRecipes("ingredients", query)
-                                recipes.forEach {
-                                    Log.d("requestLog", "name: ${it.name}, ingredients: ${it.ingredients}")
-                                }
+                                recipeAdapter = RecipeAdapter(recipes)
+                                recyclerView.adapter = recipeAdapter
                             } catch (e: IOException) {
                                 e.printStackTrace()
                                 Log.e("Error: ", "failed to fetch recipes. {${e.message}")
@@ -55,14 +61,9 @@ class SearchActivity : ComponentActivity() {
     }
 
     @Throws(IOException::class)
-    suspend fun requestRecipes(apiEndpoint: String, requestArgument: String): List<Recipe>{
-
-        //http://35.226.107.39/api/ingredients?ingredients=Salz
+    suspend fun requestRecipes(apiEndpoint: String, requestArgument: String): List<Recipe> {
         val url = "$baseURL$apiEndpoint?$apiEndpoint=$requestArgument"
-
-        val request = Request.Builder()
-            .url(url)
-            .build()
+        val request = Request.Builder().url(url).build()
 
         return withContext(Dispatchers.IO) {
             client.newCall(request).execute().use { response ->
