@@ -17,11 +17,6 @@
         android:theme="@style/Theme.KitchenCompass"
         tools:targetApi="31">
         <activity
-            android:name=".ui.search.SearchActivity"
-            android:exported="true"
-            android:label="@string/title_activity_search"
-            android:theme="@style/Theme.KitchenCompass" />
-        <activity
             android:name=".MainActivity"
             android:exported="true"
             android:label="@string/app_name"
