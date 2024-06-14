@@ -34,7 +34,7 @@ class SearchFragment : Fragment(), RecipeAdapter.OnItemClickListener {
     private lateinit var recyclerView: RecyclerView
     private lateinit var recipeAdapter: RecipeAdapter
     private lateinit var filterButton: ImageButton
-    private var currentFilter = "Name" // Default filter
+    private var currentFilter = "name"
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -86,7 +86,12 @@ class SearchFragment : Fragment(), RecipeAdapter.OnItemClickListener {
         popupMenu.menuInflater.inflate(R.menu.filter_menu, popupMenu.menu)
 
         popupMenu.setOnMenuItemClickListener { menuItem: MenuItem ->
-            currentFilter = menuItem.title.toString()
+            currentFilter = when (menuItem.itemId) {
+                R.id.filter_name -> "name"
+                R.id.filter_ingredients -> "ingredients"
+                R.id.filter_instructions -> "instructions"
+                else -> "name" // Default case
+            }
             searchView.queryHint = "Search by $currentFilter"
             true
         }
