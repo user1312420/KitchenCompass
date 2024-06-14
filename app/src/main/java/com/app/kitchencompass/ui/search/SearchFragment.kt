@@ -1,5 +1,6 @@
 package com.app.kitchencompass.ui.search
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -10,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.app.kitchencompass.DetailedActivity
 import com.app.kitchencompass.R
 import com.app.kitchencompass.Recipe
 import com.google.gson.Gson
@@ -21,7 +23,7 @@ import okhttp3.OkHttpClient
 import okhttp3.Request
 import java.io.IOException
 
-class SearchFragment : Fragment() {
+class SearchFragment : Fragment(), RecipeAdapter.OnItemClickListener {
 
     private val client = OkHttpClient()
     private val baseURL: String = "http://23.236.54.96:9999/api/"
@@ -49,7 +51,7 @@ class SearchFragment : Fragment() {
                         lifecycleScope.launch {
                             try {
                                 val recipes: List<Recipe> = requestRecipes("ingredients", query)
-                                recipeAdapter = RecipeAdapter(recipes)
+                                recipeAdapter = RecipeAdapter(recipes, this@SearchFragment)
                                 recyclerView.adapter = recipeAdapter
                             } catch (e: IOException) {
                                 e.printStackTrace()
@@ -67,6 +69,16 @@ class SearchFragment : Fragment() {
         )
 
         return view
+    }
+
+    override fun onItemClick(recipe: Recipe) {
+        val intent = Intent(context, DetailedActivity::class.java)
+        intent.putExtra("RECIPE_NAME", recipe.name)
+        intent.putExtra("RECIPE_IMAGE", recipe.previewImage)
+        intent.putExtra("RECIPE_TIME", recipe.estimated_time)
+        intent.putExtra("RECIPE_INGREDIENTS", recipe.ingredients)
+        intent.putExtra("RECIPE_STEPS", recipe.instructions)
+        startActivity(intent)
     }
 
     @Throws(IOException::class)

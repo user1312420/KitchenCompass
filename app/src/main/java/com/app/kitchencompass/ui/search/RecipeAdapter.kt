@@ -1,4 +1,3 @@
-// RecipeAdapter.kt
 package com.app.kitchencompass.ui.search
 
 import android.view.LayoutInflater
@@ -11,7 +10,11 @@ import com.app.kitchencompass.R
 import com.app.kitchencompass.Recipe
 import com.squareup.picasso.Picasso
 
-class RecipeAdapter(private val recipes: List<Recipe>) : RecyclerView.Adapter<RecipeAdapter.RecipeViewHolder>() {
+class RecipeAdapter(private val recipes: List<Recipe>, private val itemClickListener: OnItemClickListener) : RecyclerView.Adapter<RecipeAdapter.RecipeViewHolder>() {
+
+    interface OnItemClickListener {
+        fun onItemClick(recipe: Recipe)
+    }
 
     class RecipeViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val recipeName: TextView = itemView.findViewById(R.id.recipeName)
@@ -29,6 +32,10 @@ class RecipeAdapter(private val recipes: List<Recipe>) : RecyclerView.Adapter<Re
         Picasso.get().load(recipe.previewImage).into(holder.previewImage)
         holder.estimatedTime.text = recipe.estimated_time
         holder.recipeName.text = recipe.name
+
+        holder.itemView.setOnClickListener {
+            itemClickListener.onItemClick(recipe)
+        }
     }
 
     override fun getItemCount(): Int {
