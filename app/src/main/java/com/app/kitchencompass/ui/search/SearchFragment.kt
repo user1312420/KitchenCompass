@@ -4,8 +4,11 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
+import android.widget.PopupMenu
 import android.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
@@ -26,10 +29,12 @@ import java.io.IOException
 class SearchFragment : Fragment(), RecipeAdapter.OnItemClickListener {
 
     private val client = OkHttpClient()
-    private val baseURL: String = "http://23.236.54.96:9999/api/"
+    private val baseURL: String = "http://23.236.54.96:9999/api"
     private lateinit var searchView: SearchView
     private lateinit var recyclerView: RecyclerView
     private lateinit var recipeAdapter: RecipeAdapter
+    private lateinit var filterButton: ImageButton
+    private var currentFilter = "Name" // Default filter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,7 +46,12 @@ class SearchFragment : Fragment(), RecipeAdapter.OnItemClickListener {
         // Initialize views
         searchView = view.findViewById(R.id.search_view)
         recyclerView = view.findViewById(R.id.recycler_view)
+        filterButton = view.findViewById(R.id.filter_button)
+
         recyclerView.layoutManager = LinearLayoutManager(context)
+
+        // Set up PopupMenu for filter options
+        filterButton.setOnClickListener { showFilterPopup(it) }
 
         // SearchView listener
         searchView.setOnQueryTextListener(
@@ -50,7 +60,7 @@ class SearchFragment : Fragment(), RecipeAdapter.OnItemClickListener {
                     if (!query.isNullOrBlank()) {
                         lifecycleScope.launch {
                             try {
-                                val recipes: List<Recipe> = requestRecipes("ingredients", query)
+                                val recipes: List<Recipe> = requestRecipes(currentFilter, query)
                                 recipeAdapter = RecipeAdapter(recipes, this@SearchFragment)
                                 recyclerView.adapter = recipeAdapter
                             } catch (e: IOException) {
@@ -71,7 +81,21 @@ class SearchFragment : Fragment(), RecipeAdapter.OnItemClickListener {
         return view
     }
 
+    private fun showFilterPopup(view: View) {
+        val popupMenu = PopupMenu(requireContext(), view)
+        popupMenu.menuInflater.inflate(R.menu.filter_menu, popupMenu.menu)
+
+        popupMenu.setOnMenuItemClickListener { menuItem: MenuItem ->
+            currentFilter = menuItem.title.toString()
+            searchView.queryHint = "Search by $currentFilter"
+            true
+        }
+
+        popupMenu.show()
+    }
+
     override fun onItemClick(recipe: Recipe) {
+        // Handle item click and navigate to DetailedActivity
         val intent = Intent(context, DetailedActivity::class.java)
         intent.putExtra("RECIPE_NAME", recipe.name)
         intent.putExtra("RECIPE_IMAGE", recipe.previewImage)
@@ -83,7 +107,7 @@ class SearchFragment : Fragment(), RecipeAdapter.OnItemClickListener {
 
     @Throws(IOException::class)
     suspend fun requestRecipes(apiEndpoint: String, requestArgument: String): List<Recipe> {
-        val url = "$baseURL$apiEndpoint?$apiEndpoint=$requestArgument"
+        val url = "$baseURL/recipe?$apiEndpoint=$requestArgument"
         val request = Request.Builder().url(url).build()
 
         return withContext(Dispatchers.IO) {

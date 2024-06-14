@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">KitchenCompass</string>
+    <string-array name="filter_options">
+        <item>Name</item>
+        <item>Zutaten</item>
+        <item>Anweisungen</item>
+    </string-array>
 </resources>
