@@ -29,13 +29,38 @@ class DetailedActivity : AppCompatActivity() {
         val imageUrl = intent.getStringExtra("RECIPE_IMAGE")
         Picasso.get().load(imageUrl).into(detailImage)
         detailTime.text = intent.getStringExtra("RECIPE_TIME")
-        detailIngredients.text = intent.getStringExtra("RECIPE_INGREDIENTS")
-        detailDesc.text = intent.getStringExtra("RECIPE_STEPS")
-        
+
+        // INGREDIENTS formatieren und in die TextView einfügen
+        val ingredients = intent.getStringExtra("RECIPE_INGREDIENTS")
+        val formattedIngredients = formatRecipeIngredients(ingredients)
+        detailIngredients.text = formattedIngredients
+
+        // Rezept-Schritte formatieren und in die TextView einfügen
+        val steps = intent.getStringExtra("RECIPE_STEPS")
+        val formattedSteps = formatRecipeSteps(steps)
+        detailDesc.text = formattedSteps
+
         closeButton.setOnClickListener {
-                finish()
+            finish()
         }
     }
 
-  
+    // Funktion zum Formatieren der Rezept-Zutaten
+    private fun formatRecipeIngredients(ingredients: String?): String {
+        if (ingredients.isNullOrEmpty()) return ""
+
+        val formatted = ingredients.replace(", ", ",\n")
+        return formatted
+    }
+
+    // Funktion zum Formatieren der Rezept-Schritte
+    private fun formatRecipeSteps(steps: String?): String {
+        if (steps.isNullOrEmpty()) return ""
+
+        val lines = steps.split("\\d+\\.".toRegex()) // Split nach Zahlen mit Punkt
+            .filter { it.isNotBlank() }
+            .joinToString("\n\n") { it.trim() } // Füge Zeilenumbrüche ein
+
+        return lines
+    }
 }
