@@ -1,15 +1,18 @@
 package com.app.kitchencompass
 
+import android.graphics.Color
 import android.os.Bundle
 import android.widget.Button
-import androidx.appcompat.app.AppCompatActivity
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import com.squareup.picasso.Picasso
 
 class DetailedActivity : AppCompatActivity() {
 
     private lateinit var closeButton: Button
+    private var isStarred = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,6 +25,7 @@ class DetailedActivity : AppCompatActivity() {
         val detailTime: TextView = findViewById(R.id.detailTime)
         val detailIngredients: TextView = findViewById(R.id.detailIngredients)
         val detailDesc: TextView = findViewById(R.id.detailDesc)
+        val starButton: ImageButton = findViewById(R.id.starButton)
 
         // Daten aus dem Intent abrufen und die Views befüllen
         val intent = intent
@@ -42,6 +46,16 @@ class DetailedActivity : AppCompatActivity() {
 
         closeButton.setOnClickListener {
             finish()
+        }
+
+        // Logik für den Stern-Button
+        starButton.setOnClickListener {
+            if (isStarred) {
+                starButton.setColorFilter(resources.getColor(R.color.white))
+            } else {
+                starButton.setColorFilter(Color.YELLOW)
+            }
+            isStarred = !isStarred
         }
     }
 
