@@ -13,12 +13,15 @@ class DetailedActivity : AppCompatActivity() {
 
     private lateinit var closeButton: Button
     private var isStarred = false
+    private lateinit var myDB: MyDatebaseHelper
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detailed) // Setze das Layout für diese Aktivität
 
         closeButton = findViewById(R.id.close)
+        myDB = MyDatebaseHelper(this)
+
         // Initialisiere die Views
         val detailName: TextView = findViewById(R.id.detailName)
         val detailImage: ImageView = findViewById(R.id.detailImage)
@@ -48,14 +51,17 @@ class DetailedActivity : AppCompatActivity() {
             finish()
         }
 
-        // Logik für den Stern-Button
         starButton.setOnClickListener {
             if (isStarred) {
                 starButton.setColorFilter(resources.getColor(R.color.white))
             } else {
                 starButton.setColorFilter(Color.YELLOW)
+
+                // Daten in die Datenbank einfügen
+                myDB.addFavorites(
+                    detailName.text as String?, formattedIngredients,
+                    detailTime.text as String?, formattedSteps, "null")
             }
-            isStarred = !isStarred
         }
     }
 

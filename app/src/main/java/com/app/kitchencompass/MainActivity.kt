@@ -1,7 +1,9 @@
 package com.app.kitchencompass
 
+import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.ImageButton
 import androidx.fragment.app.Fragment
 import com.app.kitchencompass.ui.home.HomeFragment
 import com.app.kitchencompass.ui.recipe.RecipesFragment
@@ -12,6 +14,7 @@ class MainActivity : AppCompatActivity() {
 
     lateinit var bottomNav: BottomNavigationView
 
+    @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
