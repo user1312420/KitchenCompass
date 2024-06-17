@@ -60,7 +60,7 @@ class DetailedActivity : AppCompatActivity() {
                 // Daten in die Datenbank einfügen
                 myDB.addFavorites(
                     detailName.text as String?, formattedIngredients,
-                    detailTime.text as String?, formattedSteps, "null")
+                    detailTime.text as String?, formattedSteps, imageUrl)
             }
         }
     }

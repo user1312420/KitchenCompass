@@ -75,11 +75,11 @@ public class MyDatebaseHelper extends SQLiteOpenHelper {
                 int id = cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_ID));
                 String name = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_NAME));
                 String ingredients = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_INGREDIENTS));
-                String time = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_TIME));
                 String instructions = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_INSTRUCTIONS));
+                String time = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_TIME));
                 String image = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_IMAGE));
 
-                Recipe recipe = new Recipe(name, ingredients, time, instructions, image);
+                Recipe recipe = new Recipe(name, ingredients, instructions, time, image);
                 recipeList.add(recipe);
             } while (cursor.moveToNext());
         }
