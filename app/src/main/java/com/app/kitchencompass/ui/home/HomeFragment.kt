@@ -26,7 +26,7 @@ class HomeFragment : Fragment(), RecipeAdapter.OnItemClickListener {
 
     private var _binding: FragmentHomeBinding? = null
     private val client = OkHttpClient()
-    private val baseURL: String = "http://23.236.54.96:9999/api/"
+    private val baseURL: String = "http://34.67.0.113:9999/api/"
     private lateinit var homeAdapter: RecipeAdapter
     private lateinit var recyclerView: RecyclerView
 

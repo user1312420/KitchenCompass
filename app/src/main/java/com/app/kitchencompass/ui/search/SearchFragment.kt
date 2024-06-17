@@ -29,7 +29,7 @@ import java.io.IOException
 class SearchFragment : Fragment(), RecipeAdapter.OnItemClickListener {
 
     private val client = OkHttpClient()
-    private val baseURL: String = "http://23.236.54.96:9999/api"
+    private val baseURL: String = "http://34.67.0.113:9999/api"
     private lateinit var searchView: SearchView
     private lateinit var recyclerView: RecyclerView
     private lateinit var recipeAdapter: RecipeAdapter
@@ -60,7 +60,8 @@ class SearchFragment : Fragment(), RecipeAdapter.OnItemClickListener {
                     if (!query.isNullOrBlank()) {
                         lifecycleScope.launch {
                             try {
-                                val recipes: List<Recipe> = requestRecipes(currentFilter, query)
+                                val arguments: List<String> = query.split(' ')
+                                val recipes: List<Recipe> = requestRecipes(currentFilter, arguments)
                                 recipeAdapter = RecipeAdapter(recipes, this@SearchFragment)
                                 recyclerView.adapter = recipeAdapter
                             } catch (e: IOException) {
@@ -111,12 +112,19 @@ class SearchFragment : Fragment(), RecipeAdapter.OnItemClickListener {
     }
 
     @Throws(IOException::class)
-    suspend fun requestRecipes(apiEndpoint: String, requestArgument: String): List<Recipe> {
-        val url = "$baseURL/recipe?$apiEndpoint=$requestArgument"
+    suspend fun requestRecipes(filter: String, requestArguments: List<String>): List<Recipe> {
+        var url = "$baseURL/recipes?arguments="
+        for (r in requestArguments) {
+            url += "$r,"
+        }
+        url = url.trimEnd(',')
+
         val request = Request.Builder().url(url).build()
 
         return withContext(Dispatchers.IO) {
             client.newCall(request).execute().use { response ->
+                if (!response.isSuccessful) throw IOException("Unexpected code $response")
+
                 val responseBody = response.body?.string() ?: throw IOException("Unexpected empty response body")
                 val recipeType = object : TypeToken<List<Recipe>>() {}.type
                 Gson().fromJson(responseBody, recipeType)
