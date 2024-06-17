@@ -1,21 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- res/drawable/bordered_search_view.xml -->
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
-    <!-- Äußerer violetter Rand -->
+    <!-- Rand -->
     <item>
         <shape android:shape="rectangle">
-            <solid android:color="@color/darkerGreen" /> <!-- Violette Hintergrundfarbe -->
-            <!-- <corners android:radius="20dp" />  Abgerundete Ecken -->
+            <solid android:color="@color/darkerGreen" />
         </shape>
     </item>
 
-    <!-- Weißes Zentrum -->
+    <!-- Zentrum -->
     <item
         android:left="8dp" android:right="8dp"
         android:top="8dp" android:bottom="8dp">
         <shape android:shape="rectangle">
-            <solid android:color="@android:color/white" /> <!-- Weiße Hintergrundfarbe -->
-            <corners android:radius="16dp" /> <!-- Abgerundete Ecken, etwas weniger als der äußere Rand -->
+            <solid android:color="@android:color/white" />
+            <corners android:radius="16dp" /> <!-- Abgerundete Ecken -->
         </shape>
     </item>
 </layer-list>

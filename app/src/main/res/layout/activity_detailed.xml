@@ -19,7 +19,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            android:text="back"
+            android:text="zurück"
             android:backgroundTint="@color/darkestGreen"
             android:textColor="@android:color/white" />
 
@@ -30,7 +30,7 @@
             android:layout_gravity="end"
             android:layout_marginEnd="16dp"
             android:background="@null"
-            android:src="@drawable/baseline_star_border_24"
+            android:src="@drawable/bottom_nav_bar_favorite"
             android:contentDescription="Star Button"
             app:tint="@color/white" />
     </androidx.appcompat.widget.Toolbar>
@@ -53,7 +53,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="14dp"
-                android:text="Recipe Name"
+                android:text="Rezept Name"
                 android:textColor="@color/black"
                 android:textSize="24sp"
                 android:textStyle="bold" />
@@ -81,7 +81,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="30dp"
-                android:text="Duration:"
+                android:text="Dauer:"
                 android:textColor="@color/black"
                 android:textSize="18sp"
                 android:textStyle="bold" />
@@ -91,7 +91,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
-                android:text="time"
+                android:text="Zeit"
                 android:textSize="16sp" />
 
             <TextView
@@ -99,7 +99,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="20dp"
-                android:text="Ingredients:"
+                android:text="Zutaten:"
                 android:textColor="@color/black"
                 android:textSize="18sp"
                 android:textStyle="bold" />
@@ -116,7 +116,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="20dp"
-                android:text="Steps:"
+                android:text="Zubereitung:"
                 android:textColor="@color/black"
                 android:textSize="18sp"
                 android:textStyle="bold" />

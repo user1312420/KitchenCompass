@@ -7,9 +7,9 @@
     <item
         android:id="@+id/message"
         android:icon="@drawable/bottom_nav_bar_search"
-        android:title="Search"  />"
+        android:title="Suche"  />"
      <item
         android:id="@+id/settings"
-        android:icon="@drawable/bottom_nav_bar_recipe"
-        android:title="Recipes" />
+        android:icon="@drawable/bottom_nav_bar_favorite"
+        android:title="Favoriten" />
 </menu>

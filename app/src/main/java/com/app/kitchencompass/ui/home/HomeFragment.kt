@@ -30,7 +30,6 @@ class HomeFragment : Fragment(), RecipeAdapter.OnItemClickListener {
     private lateinit var homeAdapter: RecipeAdapter
     private lateinit var recyclerView: RecyclerView
 
-    // This property is only valid between onCreateView and onDestroyView.
     private val binding get() = _binding!!
 
     override fun onCreateView(

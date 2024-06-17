@@ -5,8 +5,8 @@
         android:title="Name"/>
     <item
         android:id="@+id/filter_ingredients"
-        android:title="Ingredient"/>
+        android:title="Zutaten"/>
     <item
         android:id="@+id/filter_instructions"
-        android:title="Instruction"/>
+        android:title="Zubereitung"/>
 </menu>
