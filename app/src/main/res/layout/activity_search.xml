@@ -13,7 +13,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintHeight_percent="0.10"
-        android:queryHint="suche nach Zutaten..."
+        android:queryHint="Suche nach Zutaten..."
         android:iconifiedByDefault="false"
         android:background="@drawable/rounded_search_view"
         android:padding="8dp">
