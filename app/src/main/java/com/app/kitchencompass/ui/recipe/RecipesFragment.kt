@@ -17,6 +17,7 @@ import com.app.kitchencompass.ui.search.RecipeAdapter
 
 class RecipesFragment : Fragment(), RecipeAdapter.OnItemClickListener {
 
+
     private lateinit var myDB: MyDatebaseHelper
     private var _binding: FragmentRecipeBinding? = null
     private lateinit var recipeAdapter: RecipeAdapter
@@ -25,7 +26,8 @@ class RecipesFragment : Fragment(), RecipeAdapter.OnItemClickListener {
     // This property is only valid between onCreateView and onDestroyView.
     private val binding get() = _binding!!
 
-    override fun onCreateView(
+    override fun onCreateView (
+
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -49,11 +51,12 @@ class RecipesFragment : Fragment(), RecipeAdapter.OnItemClickListener {
     override fun onItemClick(recipe: Recipe) {
         // Handle item click and navigate to DetailedActivity
         val intent = Intent(context, DetailedActivity::class.java)
-        intent.putExtra("RECIPE_NAME", recipe.name)
-        intent.putExtra("RECIPE_IMAGE", recipe.previewImage)
-        intent.putExtra("RECIPE_TIME", recipe.estimated_time)
-        intent.putExtra("RECIPE_INGREDIENTS", recipe.ingredients)
-        intent.putExtra("RECIPE_STEPS", recipe.instructions)
+        intent.putExtra("COLUMN_NAME", recipe.name)
+        intent.putExtra("COLUMN_IMAGE", recipe.previewImage)
+        intent.putExtra("COLUMN_TIME", recipe.estimated_time)
+        intent.putExtra("COLUMN_INGREDIENTS", recipe.ingredients)
+        intent.putExtra("COLUMN_INSTRUCTIONS", recipe.instructions)
         startActivity(intent)
     }
+
 }

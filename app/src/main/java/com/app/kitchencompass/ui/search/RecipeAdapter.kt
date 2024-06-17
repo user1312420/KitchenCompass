@@ -8,6 +8,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.app.kitchencompass.R
 import com.app.kitchencompass.Recipe
+import com.app.kitchencompass.ui.recipe.RecipesFragment
 import com.squareup.picasso.Picasso
 
 class RecipeAdapter(private val recipes: List<Recipe>, private val itemClickListener: OnItemClickListener) : RecyclerView.Adapter<RecipeAdapter.RecipeViewHolder>() {
