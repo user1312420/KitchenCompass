@@ -1,5 +1,6 @@
 package com.app.kitchencompass.ui.search
 
+import android.content.Context
 import android.content.Intent
 import android.health.connect.datatypes.units.Length
 import android.os.Bundle
@@ -8,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import android.widget.ImageButton
 import android.widget.PopupMenu
 import android.widget.SearchView
@@ -19,6 +21,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.app.kitchencompass.DetailedActivity
 import com.app.kitchencompass.R
 import com.app.kitchencompass.Recipe
+import com.google.android.material.internal.ViewUtils.hideKeyboard
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import kotlinx.coroutines.Dispatchers
@@ -67,6 +70,8 @@ class SearchFragment : Fragment(), RecipeAdapter.OnItemClickListener {
                                 Toast.makeText(context, "${recipes.size} Rezepte gefunden!", Toast.LENGTH_LONG).show()
                                 recipeAdapter = RecipeAdapter(recipes, this@SearchFragment)
                                 recyclerView.adapter = recipeAdapter
+                                val inputMethodManager = context?.getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
+                                inputMethodManager?.hideSoftInputFromWindow(view?.windowToken, 0)
                             } catch (e: IOException) {
                                 e.printStackTrace()
                                 Log.e("Error: ", "failed to fetch recipes. {${e.message}")
