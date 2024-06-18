@@ -84,7 +84,8 @@
                 android:text="Dauer:"
                 android:textColor="@color/black"
                 android:textSize="18sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                />
 
             <TextView
                 android:id="@+id/detailTime"
@@ -92,7 +93,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:text="Zeit"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -102,14 +104,17 @@
                 android:text="Zutaten:"
                 android:textColor="@color/black"
                 android:textSize="18sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+               />
 
             <TextView
                 android:id="@+id/detailIngredients"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                android:layout_marginEnd="10dp"
+                />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -119,15 +124,18 @@
                 android:text="Zubereitung:"
                 android:textColor="@color/black"
                 android:textSize="18sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                />
 
             <TextView
                 android:id="@+id/detailDesc"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
-                android:textSize="16sp" />
-
+                android:layout_marginBottom="20dp"
+                android:layout_marginEnd="10dp"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="parent"/>
         </LinearLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
