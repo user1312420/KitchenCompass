@@ -2,7 +2,6 @@ package com.app.kitchencompass.ui.search
 
 import android.content.Context
 import android.content.Intent
-import android.health.connect.datatypes.units.Length
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -21,7 +20,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.app.kitchencompass.DetailedActivity
 import com.app.kitchencompass.R
 import com.app.kitchencompass.Recipe
-import com.google.android.material.internal.ViewUtils.hideKeyboard
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import kotlinx.coroutines.Dispatchers
