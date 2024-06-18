@@ -1,6 +1,7 @@
 package com.app.kitchencompass.ui.search
 
 import android.content.Intent
+import android.health.connect.datatypes.units.Length
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -10,6 +11,7 @@ import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.PopupMenu
 import android.widget.SearchView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -62,6 +64,7 @@ class SearchFragment : Fragment(), RecipeAdapter.OnItemClickListener {
                             try {
                                 val arguments: List<String> = query.split(' ')
                                 val recipes: List<Recipe> = requestRecipes(currentFilter, arguments)
+                                Toast.makeText(context, "${recipes.size} Rezepte gefunden!", Toast.LENGTH_LONG).show()
                                 recipeAdapter = RecipeAdapter(recipes, this@SearchFragment)
                                 recyclerView.adapter = recipeAdapter
                             } catch (e: IOException) {
