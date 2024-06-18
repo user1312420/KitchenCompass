@@ -86,4 +86,12 @@ public class MyDatebaseHelper extends SQLiteOpenHelper {
         cursor.close();
         return recipeList;
     }
+
+    public void deleteRecipe(int id){
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "DELETE FROM " + TABLE_NAME + " WHERE " + COLUMN_ID + " = " + id;
+        db.execSQL(query);
+
+        Toast.makeText(context, "Deleted successfully", Toast.LENGTH_SHORT).show();
+    }
 }
