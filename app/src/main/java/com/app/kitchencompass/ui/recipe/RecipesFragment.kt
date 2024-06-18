@@ -54,6 +54,7 @@ class RecipesFragment : Fragment(), RecipeAdapter.OnItemClickListener {
 
     override fun onItemClick(recipe: Recipe) {
         val intent = Intent(context, DetailedActivity::class.java).apply {
+            putExtra("RECIPE_ID", recipe.id)
             putExtra("RECIPE_NAME", recipe.name)
             putExtra("RECIPE_IMAGE", recipe.previewImage) // URL des Bildes
             putExtra("RECIPE_TIME", recipe.estimated_time)

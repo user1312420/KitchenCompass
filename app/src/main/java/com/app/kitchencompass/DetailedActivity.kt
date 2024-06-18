@@ -1,6 +1,7 @@
 package com.app.kitchencompass
 
 import android.graphics.Color
+import android.graphics.ColorFilter
 import android.os.Bundle
 import android.widget.Button
 import android.widget.ImageButton
@@ -14,6 +15,7 @@ class DetailedActivity : AppCompatActivity() {
     private lateinit var closeButton: Button
     private var isStarred = false
     private lateinit var myDB: MyDatebaseHelper
+    val yellow: Int = 0xFFFFFF00.toInt()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,8 +32,8 @@ class DetailedActivity : AppCompatActivity() {
         val detailDesc: TextView = findViewById(R.id.detailDesc)
         val starButton: ImageButton = findViewById(R.id.starButton)
 
-        // Daten aus dem Intent abrufen und die Views befüllen
-        val intent = intent
+        val detailID: Int = intent.getIntExtra("RECIPE_ID", 0)
+
         detailName.text = intent.getStringExtra("RECIPE_NAME")
         val imageUrl = intent.getStringExtra("RECIPE_IMAGE")
         Picasso.get().load(imageUrl).into(detailImage)
@@ -51,13 +53,22 @@ class DetailedActivity : AppCompatActivity() {
             finish()
         }
 
+        val recipes: List<Recipe> = myDB.getAllRecipes()
+        val recipesNames: List<String> = recipes.map { it.name }
+
+        if(recipesNames.contains(detailName.text)){
+            starButton.setColorFilter(Color.YELLOW)
+        } else {
+            starButton.setColorFilter(resources.getColor(R.color.white))
+        }
+
+
         starButton.setOnClickListener {
-            if (isStarred) {
+            if (recipesNames.contains(detailName.text)) {
                 starButton.setColorFilter(resources.getColor(R.color.white))
+                myDB.deleteRecipe(detailID)
             } else {
                 starButton.setColorFilter(Color.YELLOW)
-
-                // Daten in die Datenbank einfügen
                 myDB.addFavorites(
                     detailName.text as String?, formattedIngredients,
                     detailTime.text as String?, formattedSteps, imageUrl)

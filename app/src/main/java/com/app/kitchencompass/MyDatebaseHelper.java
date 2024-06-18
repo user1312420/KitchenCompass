@@ -79,7 +79,7 @@ public class MyDatebaseHelper extends SQLiteOpenHelper {
                 String time = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_TIME));
                 String image = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_IMAGE));
 
-                Recipe recipe = new Recipe(name, ingredients, instructions, time, image);
+                Recipe recipe = new Recipe(id, name, ingredients, instructions, time, image);
                 recipeList.add(recipe);
             } while (cursor.moveToNext());
         }
@@ -87,9 +87,9 @@ public class MyDatebaseHelper extends SQLiteOpenHelper {
         return recipeList;
     }
 
-    public void deleteRecipe(int id){
+    public void deleteRecipe(int recipeID){
         SQLiteDatabase db = this.getReadableDatabase();
-        String query = "DELETE FROM " + TABLE_NAME + " WHERE " + COLUMN_ID + " = " + id;
+        String query = "DELETE FROM " + TABLE_NAME + " WHERE " + COLUMN_ID + " = " + recipeID;
         db.execSQL(query);
 
         Toast.makeText(context, "Deleted successfully", Toast.LENGTH_SHORT).show();
