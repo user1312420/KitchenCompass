@@ -1,5 +1,6 @@
 package com.app.kitchencompass
 
+import android.app.Activity
 import android.graphics.Color
 import android.graphics.ColorFilter
 import android.os.Bundle
@@ -8,14 +9,14 @@ import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
+import com.app.kitchencompass.ui.home.HomeFragment
 import com.squareup.picasso.Picasso
 
 class DetailedActivity : AppCompatActivity() {
 
     private lateinit var closeButton: Button
-    private var isStarred = false
     private lateinit var myDB: MyDatebaseHelper
-    val yellow: Int = 0xFFFFFF00.toInt()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -1,11 +1,13 @@
 package com.app.kitchencompass.ui.recipe
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.app.kitchencompass.DetailedActivity
@@ -13,12 +15,6 @@ import com.app.kitchencompass.MyDatebaseHelper
 import com.app.kitchencompass.Recipe
 import com.app.kitchencompass.databinding.FragmentRecipeBinding
 import com.app.kitchencompass.ui.search.RecipeAdapter
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
-import okhttp3.Request
-import java.io.IOException
 
 class RecipesFragment : Fragment(), RecipeAdapter.OnItemClickListener {
 
@@ -68,5 +64,4 @@ class RecipesFragment : Fragment(), RecipeAdapter.OnItemClickListener {
         super.onDestroyView()
         _binding = null
     }
-
 }
