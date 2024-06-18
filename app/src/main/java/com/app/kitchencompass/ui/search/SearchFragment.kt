@@ -40,24 +40,25 @@ class SearchFragment : Fragment(), RecipeAdapter.OnItemClickListener {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
+
         val view = inflater.inflate(R.layout.activity_search, container, false)
 
-        // Initialize views
+        //initialize views
         searchView = view.findViewById(R.id.search_view)
         recyclerView = view.findViewById(R.id.recycler_view)
         filterButton = view.findViewById(R.id.filter_button)
 
         recyclerView.layoutManager = LinearLayoutManager(context)
 
-        // Set up PopupMenu for filter options
+        //PopupMenu für filter options
         filterButton.setOnClickListener { showFilterPopup(it) }
 
-        // SearchView listener
+        //SearchView listener
         searchView.setOnQueryTextListener(
             object : SearchView.OnQueryTextListener {
                 override fun onQueryTextSubmit(query: String?): Boolean {
                     if (!query.isNullOrBlank()) {
+                        //start coroutine
                         lifecycleScope.launch {
                             try {
                                 val arguments: List<String> = query.split(' ')
@@ -101,7 +102,6 @@ class SearchFragment : Fragment(), RecipeAdapter.OnItemClickListener {
     }
 
     override fun onItemClick(recipe: Recipe) {
-        // Handle item click and navigate to DetailedActivity
         val intent = Intent(context, DetailedActivity::class.java)
         intent.putExtra("RECIPE_NAME", recipe.name)
         intent.putExtra("RECIPE_IMAGE", recipe.previewImage)

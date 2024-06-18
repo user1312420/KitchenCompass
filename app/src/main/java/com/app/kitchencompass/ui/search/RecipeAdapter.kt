@@ -8,7 +8,6 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.app.kitchencompass.R
 import com.app.kitchencompass.Recipe
-import com.app.kitchencompass.ui.recipe.RecipesFragment
 import com.squareup.picasso.Picasso
 
 class RecipeAdapter(private val recipes: List<Recipe>, private val itemClickListener: OnItemClickListener) : RecyclerView.Adapter<RecipeAdapter.RecipeViewHolder>() {
@@ -18,8 +17,11 @@ class RecipeAdapter(private val recipes: List<Recipe>, private val itemClickList
     }
 
     class RecipeViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        //zeigt Rezept Name
         val recipeName: TextView = itemView.findViewById(R.id.recipeName)
+        //zeigt Rezept bild
         val previewImage: ImageView = itemView.findViewById(R.id.previewImage)
+        //zeigt Zeit
         val estimatedTime: TextView = itemView.findViewById(R.id.estimated_time)
     }
 
@@ -29,9 +31,13 @@ class RecipeAdapter(private val recipes: List<Recipe>, private val itemClickList
     }
 
     override fun onBindViewHolder(holder: RecipeViewHolder, position: Int) {
+        //rezept an aktueller pos. aufrufen
         val recipe = recipes[position]
+        //lädt bild
         Picasso.get().load(recipe.previewImage).into(holder.previewImage)
+        //setzt Zeit
         holder.estimatedTime.text = recipe.estimated_time
+        //setzt Name
         holder.recipeName.text = recipe.name
 
         holder.itemView.setOnClickListener {

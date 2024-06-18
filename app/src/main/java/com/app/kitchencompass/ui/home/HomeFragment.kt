@@ -39,11 +39,11 @@ class HomeFragment : Fragment(), RecipeAdapter.OnItemClickListener {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        // Initialize RecyclerView
+        //initialize RecyclerView
         recyclerView = binding.recyclerView
         recyclerView.layoutManager = LinearLayoutManager(context)
 
-        // Load recipes
+        //load recipes
         lifecycleScope.launch {
             try {
                 val recipes: List<Recipe> = requestRecipes("random")
@@ -58,6 +58,7 @@ class HomeFragment : Fragment(), RecipeAdapter.OnItemClickListener {
     }
 
     override fun onItemClick(recipe: Recipe) {
+        //start DetailedActivity
         val intent = Intent(context, DetailedActivity::class.java).apply {
             putExtra("RECIPE_NAME", recipe.name)
             putExtra("RECIPE_IMAGE", recipe.previewImage) // URL des Bildes
@@ -75,7 +76,9 @@ class HomeFragment : Fragment(), RecipeAdapter.OnItemClickListener {
 
     @Throws(IOException::class)
     suspend fun requestRecipes(apiEndpoint: String): List<Recipe> {
+        //URL für API Anfrage
         val url = "$baseURL$apiEndpoint"
+        //HTTP Anfrage
         val request = Request.Builder().url(url).build()
 
         return withContext(Dispatchers.IO) {
